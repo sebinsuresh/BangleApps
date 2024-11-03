@@ -120,7 +120,7 @@ class TimeCalClock{
     var render=false;
     var dateStr = "";
     if (this.settings().shwDate>0) { //skip if exactly -none
-      const dateSttngs = ["","l","l-us","M","m.Y #W"];
+      const dateSttngs = ["","l","u","M","m.Y #W"];
       for (let c of dateSttngs[this.settings().shwDate]) { //add part as configured
         switch (c){
           case "l":{ //locale
@@ -128,7 +128,7 @@ class TimeCalClock{
             dateStr+=require("locale").date(d,1);
             break;
           }
-          case "l-us":{ //locale-us
+          case "u":{ //locale-us
             render=true;
             var tempDate=require("locale").date(d,1);
             dateStr+=tempDate.slice(3,6)+tempDate.slice(0,3)+tempDate.slice(6);
