@@ -5,7 +5,7 @@
   var FILE = "timecal.settings.json";
 
   const DEFAULTS = {
-    shwDate:1, //0:none, 1:locale, 2:month, 3:monthshort.year #week
+    shwDate:1, //0:none, 1:locale, 2:locale-us, 3:month, 4:monthshort.year #week
       
     wdStrt:0, //identical to getDay() 0->Su, 1->Mo, ... //Issue #1154: weekstart So/Mo, -1 for use today
 
@@ -44,7 +44,7 @@
       /*LANG*/"Show date": {
         value: chngdSttngs.shwDate,
         min: 0, max: 3,
-        format: v => [/*LANG*/"none", /*LANG*/"locale", /*LANG*/"M", /*LANG*/"m.Y #W"][v],
+        format: v => [/*LANG*/"none", /*LANG*/"locale", /*LANG*/"locale-us", /*LANG*/"M", /*LANG*/"m.Y #W"][v],
         onchange: v => chngdSttngs.shwDate = v
       },
       /*LANG*/"Start wday": {

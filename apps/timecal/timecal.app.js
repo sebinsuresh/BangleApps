@@ -17,7 +17,7 @@ class TimeCalClock{
       this._settings = require("Storage").readJSON("timecal.settings.json", 1) || {};
 
     const defaults = {
-      shwDate:1, //0:none, 1:locale, 2:month, 3:monthshort.year #week
+      shwDate:1, //0:none, 1:locale, 2:locale-us, 3:month, 4:monthshort.year #week
         
       wdStrt:0, //identical to getDay() 0->Su, 1->Mo, ... //Issue #1154: weekstart So/Mo, -1 for use today
 
@@ -120,14 +120,20 @@ class TimeCalClock{
     var render=false;
     var dateStr = "";
     if (this.settings().shwDate>0) { //skip if exactly -none
-      const dateSttngs = ["","l","M","m.Y #W"];
+      const dateSttngs = ["","l","l-us","M","m.Y #W"];
       for (let c of dateSttngs[this.settings().shwDate]) { //add part as configured
         switch (c){
           case "l":{ //locale
             render=true;
             dateStr+=require("locale").date(d,1);
             break;
-          } 
+          }
+          case "l-us":{ //locale-us
+            render=true;
+            var tempDate=require("locale").date(d,1);
+            dateStr+=tempDate.slice(3,6)+tempDate.slice(0,3)+tempDate.slice(6);
+            break;
+          }
           case "m":{ //month e.g. Jan.
             render=true;
             dateStr+=require("locale").month(d,1);
